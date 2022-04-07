@@ -1,6 +1,6 @@
 [
     {
-        "model": "m7_python.inmuebles",
+        "model": "CRUDapp.inmuebles",
         "pk": 1,
         "fields": {
             "nombre_inmueble":"Casa en Arriendo San Bernardo / Nexxos",
@@ -17,7 +17,7 @@
         }
     },
     {
-        "model": "m7_python.inmuebles",
+        "model": "CRUDapp.inmuebles",
         "pk": 2,
         "fields": {
             "nombre_inmueble":"Departamento en Arriendo en Providencia 2 dormitorios 2 baños / Inmobiliaria Focus E.I.R.L",
