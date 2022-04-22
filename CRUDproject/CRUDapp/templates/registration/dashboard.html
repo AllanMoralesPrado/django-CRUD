@@ -1,0 +1,8 @@
+{% extends 'index.html' %}
+{% block content %}
+    <h1> Bienvenido, {{user.username}} </h1>
+    <h5> First name, {{user.first_name}} </h5>
+    <h5> Last name, {{user.last_name}} </h5>
+    <h5> Email, {{user.email}} </h5>
+    <a href="update_profile/">Editar valores</a>
+{% endblock content %}
