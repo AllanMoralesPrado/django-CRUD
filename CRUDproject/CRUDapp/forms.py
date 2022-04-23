@@ -35,14 +35,14 @@ class UserUpdateForm(forms.ModelForm):
 class InmuebleForm(forms.Form):
     tipos = ((1,'Casa'),(2,'Departamento'),(3,'Parcela'),(4,'Estacionamiento'),(5,'Otro'))
     id_tipo_inmueble = forms.ChoiceField(choices=tipos)
-    comunas = [(x.id,x.Comuna) for x in list(Comuna.objects.filter())]
+    comunas = [(x.id,x.comuna) for x in list(Comuna.objects.filter())]
 
     def nombre_comuna(e):
         return e[1]
     comunas.sort(key=nombre_comuna)
 
     id_comuna = forms.ChoiceField(choices=comunas)
-    regiones = [(x.id,x.Region) for x in list(Region.objects.filter())]
+    regiones = [(x.id,x.region) for x in list(Region.objects.filter())]
     id_region = forms.ChoiceField(choices=regiones)
     nombre_inmueble = forms.CharField(label='Nombre Inmueble', max_length=100)
     descripcion = forms.CharField(label='Descripción del Inmueble', max_length=100)
@@ -56,4 +56,4 @@ class InmuebleForm(forms.Form):
 class InmueblesUpdateForm(forms.ModelForm):
     class Meta:
         model=Inmuebles
-        fields=['nombre_inmueble','description','m2_construido','numero_banos','numero_hab','direccion','m2_terreno','numero_est']
+        fields=['nombre_inmueble','descripcion','m2_construido','numero_banos','numero_hab','direccion','m2_terreno','numero_est']
