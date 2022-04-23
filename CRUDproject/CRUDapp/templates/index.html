@@ -15,6 +15,32 @@
                     <h1>Bienvenido </h1>
                     {% if user.is_authenticated %}
                         <a href="{% url 'logout' %}">Logout</a>
+                        <table class="default">
+                            <tr>
+                                <td>
+                                    <h5>Nombre Propiedad</h5>
+                                </td>
+                                <td>
+                                    <h5>Descripción</h5>
+                                </td>
+                                <td>
+                                    <h5>Dirección</h5>
+                                </td>
+                            </tr>
+                            {% for product in inmuebles %}
+                            <tr>
+                                <td>
+                                    <h5>{{ product.nombre_inmueble }}</h5>
+                                </td>
+                                <td>
+                                    <h5>{{ product.descripcion }}</h5>
+                                </td>
+                                <td>
+                                    <h5>{{ product.direccion }}</h5>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
                     {% else %}
                         <a href="{% url 'login_url' %}">Login</a>
                         <a href="{% url 'register_url' %}">Registro</a>

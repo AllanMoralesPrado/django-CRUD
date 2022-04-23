@@ -11,4 +11,5 @@ urlpatterns = [
     path('dashboard/',views.dashboardView,name='dashboard'),
     path('update_profile/',views.profile,name='update_profile'),
     path('new_inmueble/',views.new_inmuebleView,name='new_inmueble_url'),
+    path('eliminar_inmueble/',views.inmuebles_delete,name='delete_inmueble_url'),
 ]

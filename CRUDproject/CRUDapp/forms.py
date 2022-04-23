@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import gettext_lazy as _
-from .models import Comuna,Region
+from .models import Comuna,Region,Inmuebles
 
 class UserForm(UserCreationForm):
     first_name = forms.CharField()
@@ -52,3 +52,8 @@ class InmuebleForm(forms.Form):
     direccion = forms.CharField(label='Dirección', max_length=100)
     m2_terreno = forms.CharField(label='M2 de terreno', max_length=100)
     numero_est = forms.CharField(label='Núm. de estacionamientos', max_length=100)
+
+class InmueblesUpdateForm(forms.ModelForm):
+    class Meta:
+        model=Inmuebles
+        fields=['nombre_inmueble','description','m2_construido','numero_banos','numero_hab','direccion','m2_terreno','numero_est']

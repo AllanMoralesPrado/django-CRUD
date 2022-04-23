@@ -39,10 +39,14 @@ def register_tipoView(request):
 
 @login_required
 def dashboardView(request):
-    return render(request,'dashboard.html', {})
+    username = request.user
+    current_user = request.user
+    Inm = Inmuebles.objects.filter(id_user_id=current_user.id)
+    return render(request,'dashboard.html', {'inmuebles':Inm})
 
 def indexView(request):
-    return render(request, 'index.html', {})
+    Inm = Inmuebles.objects.all()
+    return render(request, 'index.html', {'inmuebles':Inm})
 
 @login_required
 def profile(request):
@@ -101,3 +105,27 @@ def new_inmuebleView(request):
 
     context={'u_form':u_form}
     return render(request,'new_inmueble.html',context)
+
+@login_required
+def inmuebles_update(request):
+    inmueble_id = request.GET['id_inmueble']
+    if request.method == 'POST':
+        inmueble_id = request.GET['id_inmueble']
+        inmueble = Inmuebles.objects.filter(id=inmueble_id).first()
+        u_form = InmueblesUpdateForm(request.POST, instance=inmueble)
+        if u_form.is_valid():
+            u_form.save()
+            return HttpResponseRedirect('/dashboard/')
+    else:
+        inmueble = Inmuebles.objects.filter(id=inmueble_id).first()
+        u_form = InmueblesUpdateForm(instance=inmueble)
+    context = {'u_form':u_form}
+    return render(request, 'registration/update_profile.html', context)
+
+
+@login_required
+def inmuebles_delete(request):
+    inmueble_id = request.GET['id_inmueble']
+    record = Inmuebles.objects.get(id=inmueble_id)
+    record.delete()
+    return HttpResponseRedirect('/dashboard/')
