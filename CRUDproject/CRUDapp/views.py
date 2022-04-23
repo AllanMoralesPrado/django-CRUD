@@ -56,3 +56,48 @@ def profile(request):
 
     context={'u_form':u_form}
     return render(request, 'registration/update_profile.html', context)
+
+@login_required
+def new_inmuebleView(request):
+    if request.method == 'POST':
+        u_form = InmuebleForm(request.POST)
+        if u_form.is_valid():
+            u_form = InmuebleForm(request.POST)
+            print(u_form)
+            id_tipo_inmueble = u_form.cleaned_data['id_tipo_inmueble']
+            id_comuna = u_form.cleaned_data['id_comuna']
+            id_region = u_form.cleaned_data['id_region']
+            nombre_inmueble = u_form.cleaned_data['nombre_inmueble']
+            descripcion = u_form.cleaned_data['descripcion']
+            m2_construido = u_form.cleaned_data['m2_construido']
+            numero_banos = u_form.cleaned_data['numero_banos']
+            numero_hab = u_form.cleaned_data['numero_hab']
+            direccion = u_form.cleaned_data['direccion']
+            m2_terreno = u_form.cleaned_data['m2_terreno']
+            numero_est = u_form.cleaned_data['numero_est']
+            print(u_form.cleaned_data)
+            tipo_inmueble = Tipo_inmueble.objects.filter(id=int(id_tipo_inmueble))[0]
+            comuna = Comuna.objects.filter(id=int(id_comuna))[0]
+            reg = Region.objects.filter(id=int(id_region))[0]
+            current_user = request.user
+            user = User.objects.filter(id=current_user.id)
+            inm = Inmuebles(id_tipo_inmueble=tipo_inmueble,
+                            id_comuna=comuna,
+                            id_region = reg,
+                            nombre_inmueble = nombre_inmueble,
+                            descripcion=descripcion,
+                            m2_construido=m2_construido,
+                            numero_banos=numero_banos,
+                            numero_hab=numero_hab,
+                            direccion=direccion,
+                            m2_terreno=m2_terreno,
+                            numero_est=numero_est)
+            print(user)
+            inm.id_user_id = current_user.id
+            inm.save()
+            return HttpResponseRedirect('/dashboard/')
+    else:
+        u_form = InmuebleForm()
+
+    context={'u_form':u_form}
+    return render(request,'new_inmueble.html',context)
